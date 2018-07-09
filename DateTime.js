@@ -227,7 +227,7 @@ var Datetime = createClass({
 	},
 
 	onInputKey: function( e ) {
-		if ( e.which === 9 && this.props.closeOnTab ) {
+		if (e.which === 27 || (e.which === 9 && this.props.closeOnTab) ) {
 			this.closeCalendar();
 		}
 	},
@@ -374,14 +374,6 @@ var Datetime = createClass({
 		});
 	},
 
-	handleClickOutside: function() {
-		if ( this.props.input && this.state.open && !this.props.open && !this.props.disableOnClickOutside ) {
-			this.setState({ open: false }, function() {
-				this.props.onBlur( this.state.selectedDate || this.state.inputValue );
-			});
-		}
-	},
-
 	localMoment: function( date, format, props ) {
 		props = props || this.props;
 		var momentFn = props.utc ? moment.utc : moment;
@@ -394,7 +386,7 @@ var Datetime = createClass({
 	componentProps: {
 		fromProps: ['value', 'isValidDate', 'renderDay', 'renderMonth', 'renderYear', 'timeConstraints'],
 		fromState: ['viewDate', 'selectedDate', 'updateOn'],
-		fromThis: ['setDate', 'setTime', 'showView', 'addTime', 'subtractTime', 'updateSelectedDate', 'localMoment', 'handleClickOutside']
+		fromThis: ['setDate', 'setTime', 'showView', 'addTime', 'subtractTime', 'updateSelectedDate', 'localMoment']
 	},
 
 	getComponentProps: function() {
@@ -449,7 +441,7 @@ var Datetime = createClass({
 		return React.createElement( 'div', { className: className }, children.concat(
 			React.createElement( 'div',
 				{ key: 'dt', className: 'rdtPicker' },
-				React.createElement( CalendarContainer, { view: this.state.currentView, viewProps: this.getComponentProps(), onClickOutside: this.handleClickOutside })
+				React.createElement( CalendarContainer, { view: this.state.currentView, viewProps: this.getComponentProps() })
 			)
 		));
 	}
