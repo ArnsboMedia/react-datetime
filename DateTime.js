@@ -406,7 +406,22 @@ var Datetime = createClass({
 		});
 
 		return props;
-	},
+  },
+
+  componentWillMount: function() {
+    document.body.addEventListener('click', this.onBodyClick);
+  },
+
+  componentWillUnmount: function() {
+    document.body.removeEventListener('click', this.onBodyClick);
+  },
+
+  onBodyClick: function(event) {
+    if (!this.state.open) return;
+    if (event.path.includes(this.refs.picker)) return;
+
+    this.closeCalendar();
+  },
 
 	render: function() {
 		// TODO: Make a function or clean up this code,
