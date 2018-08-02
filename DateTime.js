@@ -418,7 +418,7 @@ var Datetime = createClass({
 
   onBodyClick: function(event) {
     if (!this.state.open) return;
-    if (event.path.includes(this.refs.picker)) return;
+    if (event.path.includes(this.picker)) return;
 
     this.closeCalendar();
   },
@@ -455,7 +455,7 @@ var Datetime = createClass({
 
 		return React.createElement( 'div', { className: className }, children.concat(
 			React.createElement( 'div',
-				{ key: 'dt', className: 'rdtPicker', ref: 'picker' },
+				{ key: 'dt', className: 'rdtPicker', ref: function(node) { this.picker = node }.bind(this) },
 				React.createElement( CalendarContainer, { view: this.state.currentView, viewProps: this.getComponentProps() })
 			)
 		));
