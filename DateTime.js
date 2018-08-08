@@ -418,7 +418,9 @@ var Datetime = createClass({
 
   onBodyClick: function(event) {
     if (!this.state.open) return;
-    if (event.path.includes(this.picker)) return;
+    if (event.target == this.picker || this.picker.contains(event.target)) {
+      return;
+    }
 
     this.closeCalendar();
   },
