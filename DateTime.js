@@ -214,7 +214,7 @@ var Datetime = createClass({
 			update = { inputValue: value }
 			;
 
-		if ( localMoment.isValid() && !this.props.value ) {
+		if ( localMoment.isValid() ) {
 			update.selectedDate = localMoment;
 			update.viewDate = localMoment.clone().startOf('month');
 		} else {
