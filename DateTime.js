@@ -217,13 +217,12 @@ var Datetime = createClass({
 		if ( localMoment.isValid() ) {
 			update.selectedDate = localMoment;
 			update.viewDate = localMoment.clone().startOf('month');
+			this.props.onChange(localMoment);
 		} else {
 			update.selectedDate = null;
 		}
 
-		return this.setState( update, function() {
-			return this.props.onChange( localMoment.isValid() ? localMoment : this.state.inputValue );
-		});
+		return this.setState(update);
 	},
 
 	onInputKey: function( e ) {
